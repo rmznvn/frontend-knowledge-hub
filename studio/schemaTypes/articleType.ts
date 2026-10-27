@@ -45,24 +45,37 @@ export const articleType = defineType({
       of: [{ type: 'reference', to: [{ type: 'tag' }] }],
     }),
 
-    defineField({
-      name: 'difficulty',
-      title: 'Difficulty',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Beginner', value: 'beginner' },
-          { title: 'Intermediate', value: 'intermediate' },
-          { title: 'Advanced', value: 'advanced' },
-        ],
-      },
-    }),
+defineField({
+  name: 'difficulty',
+  title: 'Difficulty',
+  type: 'reference',
+  to: [{type: 'difficulty'}],
+  validation: (Rule) => Rule.required(),
+}),
 
     defineField({
       name: 'publishedAt',
       title: 'Published At',
       type: 'datetime',
     }),
+
+    defineField({
+  name: 'readingTime',
+  title: 'Reading Time (minutes)',
+  type: 'number',
+  validation: (Rule) => Rule.min(1).integer(),
+}),
+defineField({
+  name: 'relatedArticles',
+  title: 'Related Articles',
+  type: 'array',
+  of: [
+    {
+      type: 'reference',
+      to: [{type: 'article'}],
+    },
+  ],
+}),
 
     defineField({
       name: 'body',
@@ -75,6 +88,7 @@ export const articleType = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  
 
   preview: {
     select: {
@@ -83,3 +97,4 @@ export const articleType = defineType({
     },
   },
 })
+

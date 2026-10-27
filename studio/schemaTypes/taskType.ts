@@ -45,19 +45,13 @@ export const taskType = defineType({
       of: [{type: 'reference', to: [{type: 'tag'}]}],
     }),
 
-    defineField({
-      name: 'difficulty',
-      title: 'Difficulty',
-      type: 'string',
-      options: {
-        list: [
-          {title: 'Beginner', value: 'beginner'},
-          {title: 'Intermediate', value: 'intermediate'},
-          {title: 'Advanced', value: 'advanced'},
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
+defineField({
+  name: 'difficulty',
+  title: 'Difficulty',
+  type: 'reference',
+  to: [{type: 'difficulty'}],
+  validation: (Rule) => Rule.required(),
+}),
 
     defineField({
       name: 'estimatedMinutes',
@@ -141,6 +135,19 @@ export const taskType = defineType({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'article'}]}],
     }),
+
+defineField({
+  name: 'relatedTasks',
+  title: 'Related Tasks',
+  type: 'array',
+  of: [
+    {
+      type: 'reference',
+      to: [{type: 'task'}],
+    },
+  ],
+}),
+
 
     defineField({
       name: 'publishedAt',
