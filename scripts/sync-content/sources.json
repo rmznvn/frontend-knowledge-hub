@@ -1,0 +1,50 @@
+[
+  {
+    "repository": "rmznvn/js-tutor",
+    "path": "Javascript/task-1",
+    "format": "javascript",
+    "metadata": {
+      "title": "JavaScript: filter articles by title and category",
+      "description": "Filter an article array by a normalized title query and an optional category without mutating the input.",
+      "topic": "javascript",
+      "tags": [
+        "arrays",
+        "string"
+      ],
+      "difficulty": "beginner",
+      "instructions": "# Filter articles\n\nImplement `filterArticles(articles, query, category)`.\n\n- Search article titles case-insensitively.\n- Trim whitespace around the query.\n- The category \"Все\" includes all categories.\n- Otherwise match the selected category exactly.\n- Do not mutate the array or its objects.\n\nCheck an empty query, no matches, and combined query/category filtering.\n\nEditorial note: the original script starts with an unrelated React task comment. This instruction override describes the JavaScript functions actually present in script.js."
+    }
+  },
+  {
+    "repository": "rmznvn/js-tutor",
+    "path": "react/task-1",
+    "format": "react",
+    "metadata": {
+      "title": "React: article favorites",
+      "description": "Build an article favorites list with toggle buttons, a derived counter, and an accessible clear action.",
+      "topic": "react",
+      "tags": [
+        "ui-components",
+        "arrays",
+        "accessibility"
+      ],
+      "difficulty": "beginner",
+      "instructions": "# Article favorites\n\nBuild an `ArticleFavorites` component using the supplied articles.\n\n- Show article titles and favorite-toggle buttons.\n- Store selected article IDs with `useState`.\n- Derive the favorites count from the selected IDs.\n- Toggle selection without mutating state or adding duplicate IDs.\n- Use `aria-pressed` to expose button state.\n- Add a clear button, disabled when there are no favorites.\n- Removing one article must preserve the other selections.\n\nEditorial note: these instructions describe the existing nested ArticleFavorites.jsx example; README.md is a Vite template."
+    }
+  },
+  {
+    "repository": "rmznvn/astor-tutor",
+    "path": "learning/01-content-collection",
+    "format": "astro",
+    "metadata": {
+      "description": "Build a reusable resources section using Astro Content Collections, component props, and responsive CSS.",
+      "topic": "astro",
+      "tags": [
+        "ui-components",
+        "css",
+        "accessibility"
+      ],
+      "difficulty": "intermediate"
+    }
+  }
+]

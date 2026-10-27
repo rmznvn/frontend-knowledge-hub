@@ -9,7 +9,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "sync-content:dry-run": "node scripts/sync-content/index.ts --dry-run",
+    "sync-content:check": "tsc --project scripts/sync-content/tsconfig.json",
+    "sync-content:test": "node --test scripts/sync-content/tests/importer.test.ts"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.1",
@@ -28,6 +31,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@portabletext/markdown": "^2.8.1",
+    "@types/node": "^26.6.5",
     "typescript": "^6.0.3"
   }
 }

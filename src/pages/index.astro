@@ -2,30 +2,31 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { sanityClient } from 'sanity:client'
+import type { Article, Task } from '@/types/sanity'
 
 // Get published articles
-const articles = await sanityClient.fetch(`
+const articles = await sanityClient.fetch<Article[]>(`
   *[_type == "article" && defined(slug.current)]
   | order(publishedAt desc) {
     _id,
     title,
     description,
     "slug": slug.current,
-    difficulty,
+    "difficulty": difficulty->title,
     "topic": topic->title,
     "tags": tags[]->title
   }
 `)
 
 // Get published coding tasks
-const tasks = await sanityClient.fetch(`
+const tasks = await sanityClient.fetch<Task[]>(`
   *[_type == "task" && defined(slug.current)]
   | order(publishedAt desc) {
     _id,
     title,
     description,
     "slug": slug.current,
-    difficulty,
+    "difficulty": difficulty->title,
     estimatedMinutes,
     "topic": topic->title,
     "tags": tags[]->title
