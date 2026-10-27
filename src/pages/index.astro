@@ -1,11 +1,98 @@
+
 ---
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { sanityClient } from 'sanity:client'
+
+// Get published articles
+const articles = await sanityClient.fetch(`
+  *[_type == "article" && defined(slug.current)]
+  | order(publishedAt desc) {
+    _id,
+    title,
+    description,
+    "slug": slug.current,
+    difficulty,
+    "topic": topic->title,
+    "tags": tags[]->title
+  }
+`)
+
+// Get published coding tasks
+const tasks = await sanityClient.fetch(`
+  *[_type == "task" && defined(slug.current)]
+  | order(publishedAt desc) {
+    _id,
+    title,
+    description,
+    "slug": slug.current,
+    difficulty,
+    estimatedMinutes,
+    "topic": topic->title,
+    "tags": tags[]->title
+  }
+`)
 ---
 
-<BaseLayout>
-	<main class="min-h-screen bg-slate-950 px-6 py-16 text-slate-100">
-		<h1 class="text-4xl font-bold tracking-tight text-sky-400">
-			Frontend Knowledge Hub
-		</h1>
-	</main>
+<BaseLayout title="Frontend Knowledge Hub">
+  <main class="mx-auto max-w-6xl px-6 py-12">
+
+    <h1 class="mb-10 text-4xl font-bold">
+      Frontend Knowledge Hub
+    </h1>
+
+    <section class="mb-16">
+      <h2 class="mb-6 text-2xl font-semibold">
+        Latest Articles
+      </h2>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {articles.map((article) => (
+          <article class="rounded-xl border p-6">
+            <p class="mb-2 text-sm">{article.topic}</p>
+            <h3 class="text-xl font-semibold">
+              {article.title}
+            </h3>
+            <p class="mt-3 text-sm">
+              {article.description}
+            </p>
+            <p class="mt-4 text-xs">
+              {article.difficulty}
+            </p>
+          </article>
+        ))}
+      </div>
+
+      {articles.length === 0 && (
+        <p>No published articles found.</p>
+      )}
+    </section>
+
+    <section>
+      <h2 class="mb-6 text-2xl font-semibold">
+        Coding Practice
+      </h2>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {tasks.map((task) => (
+          <article class="rounded-xl border p-6">
+            <p class="mb-2 text-sm">{task.topic}</p>
+            <h3 class="text-xl font-semibold">
+              {task.title}
+            </h3>
+            <p class="mt-3 text-sm">
+              {task.description}
+            </p>
+            <p class="mt-4 text-xs">
+              {task.difficulty} · {task.estimatedMinutes} min
+            </p>
+          </article>
+        ))}
+      </div>
+
+      {tasks.length === 0 && (
+        <p>No published tasks found.</p>
+      )}
+    </section>
+
+  </main>
 </BaseLayout>

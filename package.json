@@ -13,12 +13,17 @@
   },
   "dependencies": {
     "@astrojs/react": "^7.1.1",
+    "@sanity/astro": "^3.6.0",
+    "@sanity/client": "^8.11.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "astro": "^7.4.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "react-is": "^19.3.1",
+    "sanity": "^6.20.0",
+    "styled-components": "^6.6.0",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
